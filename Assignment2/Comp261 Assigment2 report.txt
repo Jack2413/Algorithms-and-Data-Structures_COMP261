@@ -1,0 +1,88 @@
+
+Comp261 Assignment2 report
+
+Student ID: 300378961
+
+– describe what your code does and doesn’t do (eg, which stages and extensions
+above did you do).
+
+I up to the challenge part， and I done everything except the traffic light.
+
+Basically, in the assignment I use of the 2 algorithm we learned in class to improve the searching from Assignment1.
+the first algorithm is call A* search: it allows user to find the shortest road form one intersection to other and allows the user to switch to find the shortest road to find the fastest road
+
+the second algorithm is call – Articulation points: is to find the points that if removes it the graph will become disconnected.
+
+– give a detailed pseudocode algorithm for the main search.
+
+A*search Has 4 main variables they are （node path length，nodes weight and total cost） and I did store them in to node clas(s
+
+ needs a method return list of <segment> give (start node and end node)
+ the values should be Initialize node path = null , length null , weight node and total node
+ need a fringe, new fringe —> which is PriorityQueue
+ fringe add the start
+ while if the fringe not empty
+ current = fringe poll 
+ if current not visited then
+ current = visited
+ if current = end then break the loop
+ for each neighbours of the current 
+	if neighbour is not visited
+	neighbour  path form is current 
+	neighbour path length is the distance between current and neighour and adds the on total path cost
+	neighbour weight (this distance between current to end)
+	neighbour total cost is path length + weight
+	fringe add those nodes
+
+and because I did use the  priority queen and over ridder the compare method the fringe should poll the shortest node
+after all reset all values of nodes 
+
+– describe your path cost and heuristic estimate
+
+the path cost the total distance between current node to start point(sum of segments that have been through)
+the heuristic estimate must be admissible and consistent, is the cost that between the current node to the end (nothing to do with the segmnet)
+
+– give a detailed pseudocode algorithm for the articulation points.
+
+need a method the return list of <node> give( Node node)
+Initialize 
+	
+	a new HashSet<node> Articulation points
+	a new array list <Articulation node> (count max int reach back 0  parent node  current node)
+	a Articulation node class
+	subtree is 0;
+	look for each neighbour
+	neighbour not equals max int(unvisited)
+	to Iterative（neighbour 1 node）
+	if subtrees > 1 then add node to Articulation points
+
+	Iterative(neighbour count node)
+	push (neighbour count node) to stack
+		while if the stack not empty
+		current node = peek from stack . node
+			if current node != max int
+			current count, reach back = count
+			created a new Arraylist <node> child
+				for each neighbour of node
+				else if neighbour not from node then
+				add neighour to current.children
+			else if node.children not empty then 
+			child.get(0)
+				if child.count <= max int then(visited agian )
+				current.reach back = min(child.reach back,current.count)
+				else push (child.count +1 node) onto stack
+
+			else
+				if current not equals nei then
+					if current.reachback > parent.count then
+					add parent to articulationPoints
+				current reachBack = min (current reach back, node reachback)
+			remove <current count parent> from stack	
+
+– outline how you tested that your program worked.
+by printing out the informations
+e.g. for A*Search if i chick on the straight line one end to other, it should  print out the straight line as the shortest path
+and can be check  by the print length compare with other paths to see is the shortest or not.
+
+for Articulation points it can be see check that if i remove the printed point from the graph the graph will be disconnect or not. 
+and check that did I have the right amount of  the Articulation points or not.
